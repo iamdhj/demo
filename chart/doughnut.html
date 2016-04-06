@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>doughnut</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+	<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+<label for="chartJs">chartJs</label>
+<canvas id="chartJs" width="500" height="500"></canvas>
+<div id="highcharts"></div>
+</body>
+<script>
+	var doughnutData = [
+		{
+			value: 300,
+			color:"#F7464A",
+			highlight: "#FF5A5E",
+			label: "语文"
+		},
+		{
+			value: 200,
+			color: "#46BFBD",
+			highlight: "#5AD3D1",
+			label: "数学"
+		},
+		{
+			value: 100,
+			color: "#FDB45C",
+			highlight: "#FFC870",
+			label: "英语"
+		}
+	];
+	window.onload = function(){
+		var ctx = document.getElementById("chartJs").getContext("2d");
+		window.myDoughnut = new Chart(ctx).Doughnut(doughnutData);
+	};
+</script>
+<script language="JavaScript">
+	$(document).ready(function() {
+		var chart = {
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: true
+		};
+		var title = {
+			text: '不同科目题目数量'
+		};
+		var tooltip = {
+			pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		};
+		var plotOptions = {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					format: '<b>{point.name}%</b>: {point.percentage:.1f} %',
+					style: {
+						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+					}
+				}
+			}
+		};
+		var series= [{
+			type: 'pie',
+			name: 'Browser share',
+			data: [
+				['语文',   300],
+				['数学',       200],
+				['英语',    100]
+			]
+		}];
+
+		var json = {};
+		json.chart = chart;
+		json.title = title;
+		json.tooltip = tooltip;
+		json.series = series;
+		json.plotOptions = plotOptions;
+		$('#highcharts').highcharts(json);
+	});
+</script>
+</html>
