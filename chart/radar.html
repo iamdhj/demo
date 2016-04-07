@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>radar chart</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>-->
+    <script src="node_modules/chart.js/src/Chart.Core.js"></script>
+    <script src="node_modules/chart.js/src/Chart.Radar.js"></script>
 
     <!--<script src="//cdn.bootcss.com/echarts/3.0.0/echarts.js"></script>-->
     <script src="lib/echarts.js"></script>
@@ -33,57 +35,65 @@
     };
 
     window.onload = function(){
+        var ctx = document.getElementById("chartJs").getContext("2d");
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, 200, 200);
+
         window.myRadar = new Chart(document.getElementById("chartJs").getContext("2d")).Radar(radarChartData, {
                     //Boolean - Whether to show lines for each scale point
-//                    scaleShowLine : true,
+                    scaleShowLine : true,
 
                     //Boolean - Whether we show the angle lines out of the radar
-//                    angleShowLineOut : true,
+                    angleShowLineOut : true,
 
                     //Boolean - Whether to show labels on the scale
-//                    scaleShowLabels : false,
+                    scaleShowLabels : false,
 
                     // Boolean - Whether the scale should begin at zero
-//                    scaleBeginAtZero : true,
+                    scaleBeginAtZero : true,
 
                     //String - Colour of the angle line
-//                    angleLineColor : "rgba(0,0,0,.1)",
+                    angleLineColor : "rgba(0,0,0,.1)",
 
                     //Number - Pixel width of the angle line
-//                    angleLineWidth : 1,
+                    angleLineWidth : 1,
 
                     //String - Point label font declaration
-//                    pointLabelFontFamily : "'Arial'",
+                    pointLabelFontFamily : "'Arial'",
 
                     //String - Point label font weight
-//                    pointLabelFontStyle : "normal",
+                    pointLabelFontStyle : "normal",
 
                     //Number - Point label font size in pixels
-//                    pointLabelFontSize : 10,
+                    pointLabelFontSize : 10,
 
                     //String - Point label font colour
-//                    pointLabelFontColor : "#666",
+                    pointLabelFontColor : "#666",
 
                     //Boolean - Whether to show a dot for each point
                     pointDot : false,
 
                     //Number - Radius of each point dot in pixels
-//                    pointDotRadius : 3,
+                    pointDotRadius : 3,
 
                     //Number - Pixel width of point dot stroke
-//                    pointDotStrokeWidth : 1,
+                    pointDotStrokeWidth : 1,
 
                     //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-//                    pointHitDetectionRadius : 20,
+                    pointHitDetectionRadius : 20,
 
                     //Boolean - Whether to show a stroke for datasets
-//                    datasetStroke : true,
+                    datasetStroke : true,
 
                     //Number - Pixel width of dataset stroke
-                    datasetStrokeWidth : 4
+                    datasetStrokeWidth : 4,
 
                     //Boolean - Whether to fill the dataset with a colour
-//                    datasetFill : true,
+                    datasetFill : true,
+            scaleBackgroundColors : ["rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)"],
+            angleLineColor: 'red',
+
+            scaleLineColor: 'red'
 
                     //String - A legend template
 //                    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
@@ -112,8 +122,8 @@
                     { text: '化学', max: 108 },
                     { text: '生物', max: 72 }
                 ],
-                center: ['75%', '50%'],
-                radius: 120
+                center: ['50%', '50%'],
+                radius: 180
             }
         ],
         series: [
@@ -123,7 +133,6 @@
                 radarIndex: 0,
                 data: [
                     {
-                        value: [120, 118, 130, 100, 99, 70],
                         name: '张三',
                         label: {
                             normal: {
@@ -132,7 +141,8 @@
                                     return params.value;
                                 }
                             }
-                        }
+                        },
+                        value: [120, 118, 130, 100, 99, 70]
                     }
                 ]
             }
