@@ -7,46 +7,58 @@
 <body>
 <canvas id="target" width="1000" height="1000"></canvas>
 </body>
+<!--<script>-->
+    <!--var canvas = document.getElementById('target');-->
+    <!--var ctx = canvas.getContext('2d');-->
+    <!--ctx.fillStyle = '#000';-->
+    <!--ctx.fillRect(0,0,1000,1000);-->
+
+    <!--ctx.fillStyle = 'rgba(0,200,0,1)';-->
+    <!--ctx.beginPath();-->
+    <!--ctx.moveTo(100.123456, 0);-->
+    <!--ctx.lineTo(0, 100);-->
+    <!--ctx.lineTo(100.123456, 100);-->
+    <!--ctx.fill();-->
+    <!--ctx.closePath();-->
+
+    <!--ctx.beginPath();-->
+    <!--ctx.moveTo(100.123456, 0);-->
+    <!--ctx.lineTo(200, 100);-->
+    <!--ctx.lineTo(100.123456, 100);-->
+    <!--ctx.fill();-->
+    <!--ctx.closePath();-->
+
+
+    <!--ctx.fillStyle = 'rgba(0,200,0,1)';-->
+    <!--ctx.beginPath();-->
+    <!--ctx.moveTo(249.7362308853141, 250);-->
+    <!--ctx.lineTo(90.5628324589205, 301.7185722650632);-->
+    <!--ctx.lineTo(151.36166055297383, 114.599019960447);-->
+    <!--ctx.fill();-->
+    <!--ctx.closePath();-->
+    <!--ctx.beginPath();-->
+    <!--ctx.moveTo(249.7362308853141, 250);-->
+    <!--ctx.lineTo(249.7362308853141, 417.36481554897966);-->
+    <!--ctx.lineTo(90.5628324589205, 301.7185722650632);-->
+    <!--ctx.fill();-->
+    <!--ctx.closePath();-->
+    <!--ctx.beginPath();-->
+    <!--ctx.moveTo(249.7362308853141, 250);-->
+    <!--ctx.lineTo(408.9096293117077, 301.71857226506313);-->
+    <!--ctx.lineTo(249.7362308853141, 417.36481554897966);-->
+    <!--ctx.fill();-->
+    <!--ctx.closePath();-->
+<!--</script>-->
 <script>
     var canvas = document.getElementById('target');
     var ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0,0,1000,1000);
-
-    ctx.fillStyle = 'rgba(0,200,0,1)';
     ctx.beginPath();
-    ctx.moveTo(100.123456, 0);
-    ctx.lineTo(0, 100);
-    ctx.lineTo(100.123456, 100);
-    ctx.fill();
+    ctx.arc(100,100,100, 0, Math.PI*2,true); // Outer circle
+    ctx.stroke();
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.moveTo(100.123456, 0);
-    ctx.lineTo(200, 100);
-    ctx.lineTo(100.123456, 100);
-    ctx.fill();
-    ctx.closePath();
 
-
-    ctx.fillStyle = 'rgba(0,200,0,1)';
-    ctx.beginPath();
-    ctx.moveTo(249.7362308853141, 250);
-    ctx.lineTo(90.5628324589205, 301.7185722650632);
-    ctx.lineTo(151.36166055297383, 114.599019960447);
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.moveTo(249.7362308853141, 250);
-    ctx.lineTo(249.7362308853141, 417.36481554897966);
-    ctx.lineTo(90.5628324589205, 301.7185722650632);
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.moveTo(249.7362308853141, 250);
-    ctx.lineTo(408.9096293117077, 301.71857226506313);
-    ctx.lineTo(249.7362308853141, 417.36481554897966);
-    ctx.fill();
     ctx.closePath();
 </script>
 </html>
