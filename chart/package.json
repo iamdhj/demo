@@ -1,0 +1,14 @@
+{
+  "name": "chart",
+  "version": "1.0.0",
+  "description": "chart plug-in demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hong",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^1.1.1"
+  }
+}
