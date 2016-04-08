@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>radar chart</title>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>-->
+    <script src="node_modules/chart.js/src/Chart.Core.js"></script>
+    <script src="node_modules/chart.js/src/Chart.Radar.js"></script>
+
+    <!--<script src="//cdn.bootcss.com/echarts/3.0.0/echarts.js"></script>-->
+    <script src="lib/echarts.js"></script>
+</head>
+<body>
+<h3>chartJs</h3>
+<canvas id="chartJs" width="500" height="500"></canvas>
+
+<h3>echarts</h3>
+<div id="echarts" style="width: 500px; height: 500px;"></div>
+</body>
+<script>
+    var radarChartData = {
+        labels: ["语文能力", "答题速度", "答题准确率", "英语能力", "数学能力"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(50, 90, 180, 0.2)",
+                strokeColor: "rgba(50, 90, 180, 0.8)",
+                pointColor: "rgba(50, 90, 180, 0.8)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [1,2,1,2,1]
+            }
+        ]
+    };
+
+    window.onload = function(){
+        var ctx = document.getElementById("chartJs").getContext("2d");
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, 200, 200);
+
+        window.myRadar = new Chart(document.getElementById("chartJs").getContext("2d")).Radar(radarChartData, {
+            //Boolean - Whether to show lines for each scale point
+            scaleShowLine : true,
+
+            //Boolean - Whether we show the angle lines out of the radar
+            angleShowLineOut : true,
+
+            //Boolean - Whether to show labels on the scale
+            scaleShowLabels : false,
+
+            // Boolean - Whether the scale should begin at zero
+            scaleBeginAtZero : true,
+
+            //String - Colour of the angle line
+            angleLineColor : "rgba(0,0,0,.1)",
+
+            //Number - Pixel width of the angle line
+            angleLineWidth : 1,
+
+            //String - Point label font declaration
+            pointLabelFontFamily : "'Arial'",
+
+            //String - Point label font weight
+            pointLabelFontStyle : "normal",
+
+            //Number - Point label font size in pixels
+            pointLabelFontSize : 10,
+
+            //String - Point label font colour
+            pointLabelFontColor : "#666",
+
+            //Boolean - Whether to show a dot for each point
+            pointDot : false,
+
+            //Number - Radius of each point dot in pixels
+            pointDotRadius : 3,
+
+            //Number - Pixel width of point dot stroke
+            pointDotStrokeWidth : 1,
+
+            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius : 20,
+
+            //Boolean - Whether to show a stroke for datasets
+            datasetStroke : true,
+
+            //Number - Pixel width of dataset stroke
+            datasetStrokeWidth : 4,
+
+            //Boolean - Whether to fill the dataset with a colour
+            datasetFill : true,
+            scaleBackgroundColors : ["rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)"],
+            angleLineColor: 'red',
+
+            scaleLineColor: 'red'
+
+            //String - A legend template
+//                    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+        });
+    }
+</script>
+<script>
+    var myChart = echarts.init(document.getElementById('echarts'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: ''
+        },
+        legend: {
+            data: ['']
+        },
+        radar: [
+            {
+                indicator: [
+                    { text: '语文', max: 150 },
+                    { text: '数学', max: 150 },
+                    { text: '英语', max: 150 },
+                    { text: '物理', max: 120 },
+                    { text: '化学', max: 108 },
+                    { text: '生物', max: 72 }
+                ],
+                center: ['50%', '50%'],
+                radius: 180
+            }
+        ],
+        series: [
+            {
+                name: '成绩单',
+                type: 'radar',
+                radarIndex: 0,
+                data: [
+                    {
+                        name: '张三',
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter:function(params) {
+                                    return params.value;
+                                }
+                            }
+                        },
+                        value: [120, 118, 130, 100, 99, 70]
+                    }
+                ]
+            }
+        ]
+    };
+
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</html>
