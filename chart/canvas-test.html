@@ -14,15 +14,36 @@
     ctx.fillStyle = '#000';
     ctx.fillRect(0,0,1000,1000);
 
+    //beginPath\closePath
+    ctx.strokeStyle = '#f00';
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(200, 200);
+    ctx.stroke();
+//    ctx.closePath();
+    ctx.lineTo(300, 0);
+    ctx.lineTo(300, 300);
+    ctx.stroke();
+
+//    Path2D
+    ctx.strokeStyle = '#0f0';
+    var path = new Path2D();
+    path.moveTo(0, 0);
+    path.lineTo(200, 150);
+    ctx.stroke(path);
+//    path = new Path2D();
+    path.lineTo(330, 0);
+    path.lineTo(330, 330);
+    ctx.stroke(path);
+
     ctx.fillStyle = 'rgba(0,200,0,1)';
     ctx.beginPath();
     ctx.moveTo(100.123456, 0);
     ctx.lineTo(0, 100);
     ctx.lineTo(100.123456, 100);
     ctx.fill();
-//    ctx.closePath();
-//
-//    ctx.beginPath();
+    ctx.closePath();
+    ctx.beginPath();
     ctx.moveTo(100.123456, 0);
     ctx.lineTo(200, 100);
     ctx.lineTo(100.123456, 100);

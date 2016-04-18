@@ -2,156 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>radar chart</title>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>-->
-    <script src="node_modules/chart.js/src/Chart.Core.js"></script>
-    <script src="node_modules/chart.js/src/Chart.Radar.js"></script>
-
-    <!--<script src="//cdn.bootcss.com/echarts/3.0.0/echarts.js"></script>-->
-    <script src="lib/echarts.js"></script>
+    <title>Document</title>
 </head>
 <body>
-<h3>chartJs</h3>
-<canvas id="chartJs" width="500" height="500"></canvas>
-
-<h3>echarts</h3>
-<div id="echarts" style="width: 500px; height: 500px;"></div>
+<img id="radar"/>
 </body>
 <script>
-    var radarChartData = {
-        labels: ["语文能力", "答题速度", "答题准确率", "英语能力", "数学能力"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(50, 90, 180, 0.2)",
-                strokeColor: "rgba(50, 90, 180, 0.8)",
-                pointColor: "rgba(50, 90, 180, 0.8)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [1,2,1,2,1]
+    var url = buildRadarImage({
+        width: 400,
+        aValue: [0.5, 0.6, 0.7, 0.3, 0.4],
+        fillColor: 'rgba(156, 161, 217, 0.6)',
+        strokeColor: 'rgba(156, 161, 217, 0.8)',
+        lineColor: 'rgba(255, 255, 255, 0.3)',
+        aLabel:  ["语文能力", "答题速度", "答题准确率", "英语能力", "数学能力"],
+        aLayerColor: ['#f66', '#f88', '#ffcbcb', '#ffa9a9']
+    });
+    document.querySelector('#radar').src = url;
+
+    function buildRadarImage(aConfig){
+        //计算位置
+        function calPos(index, total, radius, origin){
+            var radian = Math.PI * 2 / total * index;
+            var x = origin.x + radius * Math.sin(radian);
+            var y = origin.y - radius * Math.cos(radian);
+            return {x: x, y: y};
+        }
+        //改变文字对齐方式
+        function changeDirection(ctx, origin, pos){
+            var align = 'center', baseline = 'middle';
+            if(origin.x < pos.x){
+                align = 'left';
+            }else if(origin.x > pos.x){
+                align = 'right';
             }
-        ]
-    };
 
-    window.onload = function(){
-        var ctx = document.getElementById("chartJs").getContext("2d");
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, 200, 200);
+            if(origin.y < pos.y){
+                baseline = 'top';
+            }else if(origin.y > pos.y){
+                baseline = 'bottom';
+            }
+            ctx.textAlign = align;
+            ctx.textBaseline = baseline;
+        }
+        //画形状
+        function drawShape(ctx, posList, fillColor, strokeColor){
+            var path = new Path2D();
+            for(var i=0; i<posList.length; ++i){
+                var pos = posList[i];
+                if(i==0){
+                    path.moveTo(pos.x, pos.y);
+                }else{
+                    path.lineTo(pos.x, pos.y);
+                }
 
-        window.myRadar = new Chart(document.getElementById("chartJs").getContext("2d")).Radar(radarChartData, {
-            //Boolean - Whether to show lines for each scale point
-            scaleShowLine : true,
+                if(i == posList.length - 1){
+                    pos = posList[0];
+                    path.lineTo(pos.x, pos.y);
+                }
+            }
+            if(fillColor){
+                ctx.fillStyle = fillColor;
+                ctx.fill(path);
+            }
+            if(strokeColor){
+                ctx.strokeStyle = strokeColor;
+                ctx.stroke(path);
+            }
+        }
 
-            //Boolean - Whether we show the angle lines out of the radar
-            angleShowLineOut : true,
+        var width = aConfig['width'];
+        var aValue = aConfig['aValue'];
+        var aLabel = aConfig['aLabel'];
+        var fillColor = aConfig['fillColor'];
+        var strokeColor = aConfig['strokeColor'];
+        var lineColor = aConfig['lineColor'];
+        var aLayerColor = aConfig['aLayerColor'];
+        var fontSize = aConfig['fontSize'] || 12;
+        var fontFamily = aConfig['fontFamily'] || "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+        var fontColor = aConfig['fontColor'] || aLayerColor[0];
 
-            //Boolean - Whether to show labels on the scale
-            scaleShowLabels : false,
+        var marginTop = 20;
+        var marginLeft = 45;
+        var halfWith = width / 2;
+        var angleCount = aValue.length;
+        var origin = {x:halfWith + marginLeft, y:halfWith + marginTop};
+        var canvas = document.createElement('canvas');
+        canvas.width = width + marginLeft * 2;//设置大小
+        canvas.height = width + marginTop;
 
-            // Boolean - Whether the scale should begin at zero
-            scaleBeginAtZero : true,
+        if (!canvas.getContext || typeof(Path2D) == 'undefined') {
+            return;
+        }
 
-            //String - Colour of the angle line
-            angleLineColor : "rgba(0,0,0,.1)",
+        var path, ctx = canvas.getContext('2d');
 
-            //Number - Pixel width of the angle line
-            angleLineWidth : 1,
+        //重置画布为白色
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            //String - Point label font declaration
-            pointLabelFontFamily : "'Arial'",
+        //过渡背景色
+        var layerCount = aLayerColor.length, posList = [];
+        for(var i=0; i<layerCount; ++i){
+            for(var j=0; j<angleCount; ++j){
+                posList[j] = calPos(j, angleCount, halfWith * (layerCount - i) / layerCount, origin);
+            }
+            drawShape(ctx, posList, aLayerColor[i], i == 0 ? lineColor: null);
+        }
 
-            //String - Point label font weight
-            pointLabelFontStyle : "normal",
+        //中心到角线
+        ctx.strokeStyle = lineColor;
+        for(j=0; j<angleCount; ++j){
+            var pos = calPos(j, angleCount, halfWith, origin);
+            path = new Path2D();
+            path.moveTo(origin.x, origin.y);
+            path.lineTo(pos.x, pos.y);
+            ctx.stroke(path);
+        }
 
-            //Number - Point label font size in pixels
-            pointLabelFontSize : 10,
+        //数值标题
+        ctx.font = fontSize + "px " + fontFamily;
+        for(j=0; j<angleCount; ++j){
+            pos = calPos(j, angleCount, halfWith, origin);
+            changeDirection(ctx, origin, pos);
+            ctx.fillText(aLabel[j], pos.x, pos.y);
+        }
 
-            //String - Point label font colour
-            pointLabelFontColor : "#666",
+        //中间区域颜色
+        ctx.lineWidth = 3;
+        for(i=0; i<angleCount; ++i){
+            posList[i] = calPos(i, angleCount, halfWith * aValue[i], origin);
+        }
+        drawShape(ctx, posList, fillColor, strokeColor);
 
-            //Boolean - Whether to show a dot for each point
-            pointDot : false,
-
-            //Number - Radius of each point dot in pixels
-            pointDotRadius : 3,
-
-            //Number - Pixel width of point dot stroke
-            pointDotStrokeWidth : 1,
-
-            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-            pointHitDetectionRadius : 20,
-
-            //Boolean - Whether to show a stroke for datasets
-            datasetStroke : true,
-
-            //Number - Pixel width of dataset stroke
-            datasetStrokeWidth : 4,
-
-            //Boolean - Whether to fill the dataset with a colour
-            datasetFill : true,
-            scaleBackgroundColors : ["rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)", "rgba(0,200,0,1)"],
-            angleLineColor: 'red',
-
-            scaleLineColor: 'red'
-
-            //String - A legend template
-//                    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-
-        });
+        return canvas.toDataURL('image/jpeg', 1);
     }
-</script>
-<script>
-    var myChart = echarts.init(document.getElementById('echarts'));
-
-    // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: ''
-        },
-        legend: {
-            data: ['']
-        },
-        radar: [
-            {
-                indicator: [
-                    { text: '语文', max: 150 },
-                    { text: '数学', max: 150 },
-                    { text: '英语', max: 150 },
-                    { text: '物理', max: 120 },
-                    { text: '化学', max: 108 },
-                    { text: '生物', max: 72 }
-                ],
-                center: ['50%', '50%'],
-                radius: 180
-            }
-        ],
-        series: [
-            {
-                name: '成绩单',
-                type: 'radar',
-                radarIndex: 0,
-                data: [
-                    {
-                        name: '张三',
-                        label: {
-                            normal: {
-                                show: true,
-                                formatter:function(params) {
-                                    return params.value;
-                                }
-                            }
-                        },
-                        value: [120, 118, 130, 100, 99, 70]
-                    }
-                ]
-            }
-        ]
-    };
-
-
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
 </script>
 </html>
