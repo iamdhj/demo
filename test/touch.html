@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Document</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <div id="touch" onclick="console.log('inline')">touch me</div>
+</body>
+<script>
+    $(function(){
+//       $('#touch').bind('touchstart', function(){
+//           console.log('touch');
+//       });
+        $('#touch').bind('click', function(){
+           console.log('bind');
+       });
+    });
+</script>
+</html>
