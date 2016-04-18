@@ -1,0 +1,1 @@
+"use strict";function print(){console.log(name)}var find=function(){};find();var name="task";print();
