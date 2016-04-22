@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<p>Email me at <a class="js-emaillink" href="mailto:matt@example.co.uk">matt@example.co.uk</a></p>
+<p><button class="js-emailcopybtn"><img src="./images/copy-icon.png" /></button></p>
+
+<p><textarea class="js-cuttextarea">Hello I'm some text</textarea></p>
+
+<p><button class="js-textareacutbtn" disable>Cut Textarea</button></p>
+
+</body>
+<script>
+    var copyEmailBtn = document.querySelector('.js-emailcopybtn');
+    copyEmailBtn.addEventListener('click', function(event) {
+        // Select the email link anchor text
+        var emailLink = document.querySelector('.js-emaillink');
+        var range = document.createRange();
+        range.selectNode(emailLink);
+        window.getSelection().addRange(range);
+
+        try {
+            // Now that we've selected the anchor text, execute the copy command
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copy email command was ' + msg);
+        } catch(err) {
+            console.log('Oops, unable to copy');
+        }
+
+        // Remove the selections - NOTE: Should use
+        // removeRange(range) when it is supported
+        window.getSelection().removeAllRanges();
+    });
+
+
+    var cutTextareaBtn = document.querySelector('.js-textareacutbtn');
+    cutTextareaBtn.addEventListener('click', function(event) {
+        var cutTextarea = document.querySelector('.js-cuttextarea');
+        cutTextarea.select();
+
+        try {
+            var successful = document.execCommand('cut');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Cutting text command was ' + msg);
+        } catch(err) {
+            console.log('Oops, unable to cut');
+        }
+    });
+</script>
+</html>

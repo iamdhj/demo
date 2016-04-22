@@ -14,7 +14,10 @@
         fillColor: 'rgba(156, 161, 217, 0.6)',
         strokeColor: 'rgba(156, 161, 217, 0.8)',
         lineColor: 'rgba(255, 255, 255, 0.3)',
-        aLabel:  ["语文能力", "答题速度", "答题准确率", "英语能力", "数学能力"],
+        marginTop: 80,
+        marginLeft: 120,
+        fontSize: 28,
+        aLabel:  ["语文能力\n额外信息", "答题速度\n额外信息", "答题准确率\n额外信息", "英语能力\n额外信息", "数学能力\n额外信息"],
         aLayerColor: ['#f66', '#f88', '#ffcbcb', '#ffa9a9']
     });
     document.querySelector('#radar').src = url;
@@ -74,6 +77,7 @@
         var aValue = aConfig['aValue'];
         var aLabel = aConfig['aLabel'];
         var fillColor = aConfig['fillColor'];
+        var bgColor = aConfig['bgColor'] || '#fff';
         var strokeColor = aConfig['strokeColor'];
         var lineColor = aConfig['lineColor'];
         var aLayerColor = aConfig['aLayerColor'];
@@ -81,14 +85,14 @@
         var fontFamily = aConfig['fontFamily'] || "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
         var fontColor = aConfig['fontColor'] || aLayerColor[0];
 
-        var marginTop = 20;
-        var marginLeft = 45;
-        var halfWith = width / 2;
+        var marginTop = aConfig['marginTop'] || 20;
+        var marginLeft = aConfig['marginLeft'] || 45;
+
+        var halfWith = width / 2 - Math.max(marginLeft, marginTop);
         var angleCount = aValue.length;
         var origin = {x:halfWith + marginLeft, y:halfWith + marginTop};
         var canvas = document.createElement('canvas');
-        canvas.width = width + marginLeft * 2;//设置大小
-        canvas.height = width + marginTop;
+        canvas.height = canvas.width = width;//设置大小
 
         if (!canvas.getContext || typeof(Path2D) == 'undefined') {
             return;
@@ -96,23 +100,24 @@
 
         var path, ctx = canvas.getContext('2d');
 
-        //重置画布为白色
-        ctx.fillStyle = '#fff';
+        //重置画布颜色
+        ctx.fillStyle = bgColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         //过渡背景色
-        var layerCount = aLayerColor.length, posList = [];
-        for(var i=0; i<layerCount; ++i){
-            for(var j=0; j<angleCount; ++j){
+        var i, j, layerCount = aLayerColor.length, posList = [];
+        for(i=0; i<layerCount; ++i){
+            for(j=0; j<angleCount; ++j){
                 posList[j] = calPos(j, angleCount, halfWith * (layerCount - i) / layerCount, origin);
             }
             drawShape(ctx, posList, aLayerColor[i], i == 0 ? lineColor: null);
         }
 
         //中心到角线
+        var pos;
         ctx.strokeStyle = lineColor;
         for(j=0; j<angleCount; ++j){
-            var pos = calPos(j, angleCount, halfWith, origin);
+            pos = calPos(j, angleCount, halfWith, origin);
             path = new Path2D();
             path.moveTo(origin.x, origin.y);
             path.lineTo(pos.x, pos.y);
@@ -120,11 +125,23 @@
         }
 
         //数值标题
+        var label, labels, posY;
+        ctx.fillStyle = fontColor;
         ctx.font = fontSize + "px " + fontFamily;
-        for(j=0; j<angleCount; ++j){
-            pos = calPos(j, angleCount, halfWith, origin);
+        for (i = 0; i < angleCount; ++i) {
+            labels = aLabel[i].split('\n');
+            pos = calPos(i, angleCount, halfWith, origin);
             changeDirection(ctx, origin, pos);
-            ctx.fillText(aLabel[j], pos.x, pos.y);
+            for (j = 0; j < labels.length; ++j) {
+                if(ctx.textBaseline == 'top'){
+                    posY = pos.y + j * (fontSize + 5);
+                    label = labels[j];
+                }else{
+                    posY = pos.y + -j * (fontSize + 5);
+                    label = labels[labels.length - 1 - j];
+                }
+                ctx.fillText(label, pos.x, posY);
+            }
         }
 
         //中间区域颜色

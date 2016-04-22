@@ -6,7 +6,8 @@
 </head>
 <body>
 <h4>canvas拼凑图形，位置不为整数，并且不连续（closePath、beginPath）,会出现缝隙</h4>
-<canvas id="target" width="500" height="500"></canvas>
+<canvas id="test" width="500" height="500"></canvas>
+<canvas id="target" width="500" height="500" style="display: none;"></canvas>
 </body>
 <script>
     var canvas = document.getElementById('target');
@@ -70,5 +71,12 @@
     ctx.lineTo(249.7362308853141, 417.36481554897966);
     ctx.fill();
     ctx.closePath();
+</script>
+<script>
+    var canvas = document.getElementById('test');
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'red';
+    ctx.font = "12px 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+    ctx.fillText('"C:\Program Files (x86)\JetBrains\WebStorm 10.0.2\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" Symbol.js', 0, 50);
 </script>
 </html>
