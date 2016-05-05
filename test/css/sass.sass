@@ -1,0 +1,66 @@
+.main
+  font:
+    family: fantasy
+    size: 30em
+    weight: bold
+
+$color: red
+$bg: black
+
+.name
+  color: $color
+  background-color: $bg
+
+$color: green !default
+$bg: white
+
+.age
+  color: $color
+  background-color: $bg
+
+=mixin
+  font:
+    family: Arial
+    size: 20px
+    weight: bold
+  color: #f00
+
+.page
+  +mixin
+  padding: 4px
+
+=border
+  border-width: 10px
+  @content
+
+.item
+  +border
+    font:
+      weight: 700
+      size: 1.5em
+
+.message
+  padding: 10px
+  border: 1px solid #eee
+
+.warning
+  @extend .message
+  color: #aaaaaa
+
+.success
+  @extend .message
+  color: #bbbbbb
+
+%red-card
+  border: 1px solid #300
+  background-color: #ecc
+  color: #c00
+
+.alert
+  width: 1px
+  @extend %red-card
+
+.notice
+  width: 2px
+  @extend %red-card
+

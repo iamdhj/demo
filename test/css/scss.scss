@@ -1,0 +1,10 @@
+@mixin mixin{
+  font: {
+    family: Arial;
+    size: 20px;
+  }
+}
+
+.page{
+  @include mixin;
+}

@@ -1,0 +1,55 @@
+radius(n)
+  -webkit-border-radius: n
+  -moz-border-radius: n
+  border-radius: n
+
+.circle
+  radius(50%)
+
+.border
+  radius: 50%
+
+border(foo)
+  color: red
+  border-width: 20px;
+  {foo}
+border2()
+  color: blue;
+  {block}
+
+.item
+  custom =
+    font-weight: 700
+    font-size: 1.5em
+  border(custom)
+
+.item2
+  +border2()
+    font-family: Arial
+    font-weight: bold
+    font-size: 1.5em
+
+.message
+  padding: 10px
+  border: 1px solid #eee
+
+.warning
+  @extend .message
+  color: #aaaaaa
+
+.success
+  @extend .message
+  color: #bbbbbb
+
+$red-card
+   border: 1px solid #300
+   background-color: #ecc
+   color: #c00
+
+.alert
+  width: 1px
+  @extend $red-card
+
+.notice
+  width: 2px
+  @extend $red-card

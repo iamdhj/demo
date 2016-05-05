@@ -1,0 +1,145 @@
+@date: red;
+
+@array: alice black, bob orange;
+
+/*fun*/
+.border-func{
+  border: 0 solid #fff;
+}
+.border-func(widen){
+  border: 10px solid #fff;
+}
+.border-func(narrow){
+  border: 1px solid #fff;
+}
+.main{
+  .border-func;
+  .border-func(narrow);
+  .border-func(widen);
+}
+
+/*foreach*/
+.creatcolorclasses(@iterator:1) when(@iterator <= length(@array)) {
+  @name: extract(extract(@array, @iterator),1);
+  .cl-@{name} {
+    background-color: extract(extract(@array, @iterator),2);
+  }
+  .creatcolorclasses((@iterator + 1));
+}
+.creatcolorclasses();
+
+.loop(@counter) when (@counter > 0){
+  .loop(@counter - 1);
+  width: 10px * @counter;
+}
+.loop-main{
+  .loop(5);
+}
+
+/*cross*/
+.name, .age, .gender{
+  & &{
+    color: red;
+  }
+}
+
+/*variable*/
+@color: green;
+body{
+  background-color: @color;
+}
+
+/*interpolate*/
+@key: a;
+@key-a: "Apple";
+@key-g: "Google";
+.content(@key){
+  @var: ~"key-@{key}";
+  &::before{
+    content: @@var;
+  }
+}
+.company-@{key}{
+  .content(a);
+}
+.company-g{
+  .content(g);
+}
+@md: screen;
+@orient: landscape;
+@media @md and (orientation: @orient) {
+  body {
+    width: 960px;
+  }
+}
+
+
+//WebStorm nonsupport
+//@prefix: ui;
+//@keyframes ~"@{prefix}-fade-in" {
+//  0% {
+//    opacity: 0;
+//  }
+//  100% {
+//    opacity: .4;
+//  }
+//}
+
+//parameter
+.border(@custom){
+  border-width: 10px;
+  @custom();
+}
+
+.item{
+  @border: {
+    border: solid red;
+  };
+  .border(@border);
+}
+
+//extend
+.message{
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
+
+.warning:extend(.message){
+  color: #aaaaaa
+}
+
+.success:extend(.message){
+  color: #bbbbbb
+}
+
+/*js key `code` */
+@str: "hello";
+@result: ~`@{str}.toUpperCase() + '!'`;
+.result{
+  content: "@{result}";
+}
+
+/*error*/
+.clearfix() {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+}
+
+.clearfix {
+  .clearfix();
+}
+
+.list {
+  .clearfix();
+}
+
+@import (reference) "placeholder.less";
+.alert{
+  width: 1px;
+  &:extend(.red-card);
+}
