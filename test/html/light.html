@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html, body{
+            height: 2500px;
+            background: url(res/bg.jpg);
+        }
+        body{
+            text-align: center;
+            padding-top: 900px;
+        }
+        .item{
+            position: relative;
+        }
+        .light{
+            position: absolute;
+            top: 280px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 1920px;
+            height: 195px;
+            background: url(res/light.png);
+            mix-blend-mode: overlay;
+        }
+        .light2{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            mix-blend-mode: screen;
+            z-index: 1;
+        }
+        .border{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 1034px;
+            height: 382px;
+            background: url(res/border.png) no-repeat;
+            /*mix-blend-mode: screen;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="item">
+        <img src="res/light.png" class="light" alt=""/>
+        <img src="res/light2.png" class="light2" alt=""/>
+        <div class="border"></div>
+    </div>
+</body>
+</html>

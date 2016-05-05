@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .test1{
+            width: 804px;
+            height: 200px;
+            background: url(res/color.jpg) top left, url(res/color.jpg) center center,  url(res/color.jpg) bottom right;
+            background-blend-mode: multiply;
+            background-color: white;
+            background-repeat: repeat-y;
+            transition: .25s .5s;
+            border-radius: .25rem;
+        }
+        .test1:hover{
+            background-position: top center, center center, bottom center;
+            transition: 1.5s 0s;
+        }
+    </style>
+</head>
+<body>
+<div class="test1"></div>
+</body>
+</html>

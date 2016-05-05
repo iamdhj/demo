@@ -22,6 +22,9 @@
   "devDependencies": {
     "angular": "^1.5.3",
     "bootstrap": "^3.3.6",
-    "jquery": "^2.2.3"
+    "jquery": "^2.2.3",
+    "less": "^2.6.1",
+    "sass": "^0.5.0",
+    "stylus": "^0.54.5"
   }
 }

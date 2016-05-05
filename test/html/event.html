@@ -31,14 +31,14 @@
         evt.stopPropagation();
     };
 
-    document.getElementById('content').onclick = function(){
-        document.getElementById('dialog').style.display = 'none';
-    };
-
     //preventDefault\return false; 停止默认事件(会覆盖行内定义onclick)
     document.querySelector('a').onclick = function(evt){
 //        evt.preventDefault();
 //        return false;
+    };
+
+    document.getElementById('content').onclick = function(){
+        document.getElementById('dialog').style.display = 'none';
     };
 </script>
 </html>
