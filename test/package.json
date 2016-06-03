@@ -22,8 +22,12 @@
   "devDependencies": {
     "angular": "^1.5.3",
     "bootstrap": "^3.3.6",
+    "core-js": "^2.4.0",
+    "cross-spawn": "^2.2.3",
     "jquery": "^2.2.3",
+    "jsdom": "^8.5.0",
     "less": "^2.6.1",
+    "qunitjs": "^2.0.0-rc1",
     "sass": "^0.5.0",
     "stylus": "^0.54.5"
   }

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QUnit demo</title>
+    <link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
+    <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+</body>
+<script>
+    QUnit.test('hello test', function(assert){
+       assert.ok(11 == '1', 'Passed!');
+    });
+</script>
+</html>

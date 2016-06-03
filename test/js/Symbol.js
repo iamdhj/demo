@@ -2,30 +2,28 @@
 
 let key = Symbol('key');
 
-//Î¨Ò»ÊôÐÔÃû
-//one
+//å”¯ä¸€å±žæ€§å
 let obj1 = {};
 obj1['key'] = 'value';
 obj1[key] = 'Symbol1';
-//two
 let obj2 = {
     [key]: 'Symbol2'
 };
-//three
 let obj3 = {};
 Object.defineProperty(obj3, key, {value: 'Symbol3'});
 console.log(obj1[key], obj2[key], obj3[key]);
 
-
-//ÊôÐÔÃûÈ¡Öµ
-//Object.getOwnPropertySymbols(Symbol)¡¢Reflect.ownKeys(all) --harmony_reflect
+//å±žæ€§åå–å€¼Object.getOwnPropertySymbols(Symbol)ã€Reflect.ownKeys(all) --harmony_reflect
 let symbol = Object.getOwnPropertySymbols(obj1)[0];
-//console.log(obj1, obj1[symbol], Reflect && Reflect.ownKeys && Reflect.ownKeys(obj1));
+console.log(obj1, obj1[symbol], global.Reflect && Reflect.ownKeys && Reflect.ownKeys(obj1));
 
-//ÖØÐÂÊ¹ÓÃ
-let key1 = Symbol.for('key');
-let key2 = Symbol.for('key');
-console.log(key1 == key2, Symbol.keyFor(key1));
+//é‡æ–°ä½¿ç”¨
+// let key1 = Symbol.for('key');
+// let key2 = Symbol.for('key');
+// console.log(key1 == key2, Symbol.keyFor(key1));
 
-//ÄÚÖÃÖµ
-console.log(Symbol);
+//iterator
+// let arr = [1,2,3], step, iterator = arr[Symbol.iterator]();
+// while(!((step = iterator.next()).done)){
+//     console.log(step.value);
+// }

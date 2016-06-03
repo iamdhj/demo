@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    var list = $('<div></div><span></span><a></a>');
+    var result = '';
+    for(var i of list){
+        result += i.nodeName;
+    }
+    console.log(result);
+</script>
+</html>

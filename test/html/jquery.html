@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    $(function(){
+       console.log(ready);
+    });
+    jQuery.holdReady(true);
+    setTimeout(function(){
+        console.log('time out');
+        window.ready = 'ready';
+        jQuery.holdReady(false);
+    }, 3000);
+</script>
+</html>
