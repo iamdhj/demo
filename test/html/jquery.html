@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <style>
+        .inner{
+            display: inline-block;
+            border: 1px solid red;
+            margin: 50px;
+        }
+    </style>
 </head>
 <body>
+<div class="inner">
+    <button class="button">click</button>
+</div>
 
 </body>
 <script>
@@ -18,5 +28,12 @@
         window.ready = 'ready';
         jQuery.holdReady(false);
     }, 3000);
+    var button = $('.inner');
+    button.click(function(){
+        alert('click');
+    });
+    var clone = button.clone(true);
+    button.removeClass('inner');
+    button.after(clone);
 </script>
 </html>

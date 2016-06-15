@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas{
+            border: 1px solid #039;
+        }
+    </style>
+</head>
+<body>
+<canvas id="target"></canvas>
+<span id="pos"></span>
+</body>
+<script>
+    var canvas = document.querySelector('#target');
+    var ctx = canvas.getContext('2d');
+    if(ctx){
+        ctx.fillStyle = 'red';
+        ctx.fillRect(0, 0, 100, 100);
+    }
+    canvas.onmousemove = function(e){
+        var pos = document.querySelector('#pos');
+        var rect = this.getBoundingClientRect(),
+                x = e.clientX - rect.left,
+                y = e.clientY - rect.top;
+        ctx.beginPath();
+        ctx.rect(0, 0, 100, 100);
+        pos.innerHTML = ctx.isPointInPath(x, y) ? 'inner' : 'outer';
+    }
+</script>
+</html>
