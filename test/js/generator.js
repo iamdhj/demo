@@ -1,13 +1,14 @@
-function* genFn() {
-    var x = yield 2;
-    yield x;
-    return "done";
+function* genFn(x) {
+    var y = yield x + 2;
+    return y;
 }
 
-var gen = genFn();
+var gen = genFn(1);
 console.log(gen.next());  // {value: 2, done: false}
-console.log(gen.next(1)); // {value: 1, done: false}
-console.log(gen.next());  // {value: "done", done: true}
+console.log(gen.next(2)); // {value: 1, done: false}
+// console.log(gen.next());  // {value: "done", done: true}
+
+console.log('#################');
 
 function* f() {
     for(var i=0; true; i++) {

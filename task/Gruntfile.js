@@ -12,6 +12,11 @@ module.exports = function( grunt ){
                     'dist/<%= pkg.name %>.grunt.js' : ['src/task.js', 'src/file.js']
                 }
             }
+        },
+        log: {
+            foo: [1, 2, 3],
+            bar: 'hello world',
+            baz: false
         }
     } );
 
@@ -35,5 +40,7 @@ module.exports = function( grunt ){
         grunt.log.writeln('start test2');
     });
 
-
+    grunt.registerMultiTask('log', 'Log stuff.', function() {
+        grunt.log.writeln(this.target + ': ' + this.data);
+    });
 };

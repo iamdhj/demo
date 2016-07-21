@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>image max-width effect</title>
+  <style>
+    .outer{
+      position: relative;
+      width: 100px;
+      height: 120px;
+      background-color: red;
+    }
+    .inner{
+      position: absolute;
+      background-color: blue;
+      white-space: nowrap;
+    }
+  #test1 img{
+    max-width: 100%;
+  }
+  </style>
+</head>
+<body>
+  <label for="test1">image with max-width</label>
+  <div id="test1" class="outer">
+    <div class="inner">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+    </div>
+  </div>
+
+  <label for="test2">image without max-width</label>
+  <div id="test2" class="outer">
+    <div class="inner">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+      <img src="https://www.bing.com/s/a/hp_zh_cn.png" alt="">
+    </div>
+  </div>
+</body>
+</html>

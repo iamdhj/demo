@@ -13,5 +13,5 @@ var assert = require('assert');
 
 // assert.deepEqual(false, null, 'two value different');
 
-assert.notEqual(false, null, 'two value is same');
-// assert(false, 'throw error');
+// assert.notEqual(false, null, 'two value is same');
+assert(false, 'throw error');

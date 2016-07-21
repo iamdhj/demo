@@ -2,9 +2,57 @@
 
 @array: alice black, bob orange;
 
+@name: ~"class-name";
+@content: "name";
+.@{name}{
+  color: blue;
+  content: @@content;
+}
+
+
+@className: ~'.a';
+.test{
+  @{className}{
+    color: red;
+  }
+}
+.test-class{
+  color: red;
+}
+.hover(@var){
+  a.active > .@{var}, a:hover > .@{var}{
+    color: green;
+  }
+}
+.hover(test-class);
+
+
+@mobile: ~"screen and (min-width: 641px)";
+.body{
+  .main{
+    height: 20px;
+    @media @mobile{
+      height: 40px;
+    }
+    .name{
+      color: red;
+      @media @mobile{
+        color: black;
+      }
+    }
+  }
+  .sec{
+    height: 30px;
+    @media @mobile{
+      height: 60px;
+    }
+  }
+}
+
+
 /*fun*/
 .border-func{
-  border: 0 solid #fff;
+  border: 20px solid #fff;
 }
 .border-func(widen){
   border: 10px solid #fff;
@@ -34,6 +82,15 @@
 }
 .loop-main{
   .loop(5);
+}
+
+/*parent*/
+.parent{
+  .child{
+    & &:hover{
+      color: red;
+    }
+  }
 }
 
 /*cross*/
