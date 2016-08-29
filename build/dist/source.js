@@ -1,0 +1,1 @@
+define("data/prop",{date:new Date}),define("extra",["data/prop"],function(e){return{name:"require.js demo ~~",date:e.date.getTime()}}),require.config({}),require(["require","extra"],function(e,n){document.querySelector("body").innerHTML+=n.name+n.date}),define("main",function(){});

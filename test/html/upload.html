@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<form onsubmit="return test();">
+    <input type="file" name="filecontent">
+    <input type="hidden" name="op" value="upload">
+    <input type="submit" value="上传">
+</form>
+</body>
+<script>
+    function FormUpload(elements, url, callback){
+        if(typeof(elements) == 'undefined'){return;}
+
+        var form = null;
+        if(typeof(FormData) != 'undefined'){
+            if(elements.tagName == 'FORM'){
+                form = new FormData(elements);
+            }else{
+                form = new FormData();
+                for(var key in elements){
+                    if(elements.hasOwnProperty(key)){
+                        form.append(key, elements[key]);
+                    }
+                }
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", url, true);
+//            xhr.setRequestHeader('timeout', '180');
+//            xhr.setRequestHeader('Authorization', 'nWT7xpEsykdu7fIRXc6d7FV7Eg1hPTEwMDU0NzkxJms9QUtJRGRmRzFES0pKeDJCc0d5dkhxVVhWU294VXk3Z21FRm1sJmU9MTQ3MDg4NjkwMyZ0PTE0NzA4ODY3MjMmcj0zMDYzMCZmPS8xLzEvMjUuanBnJmI9bG9jYWxwdWJsaWNpbWFnZQ==');
+//            xhr.setRequestHeader("x-requested-with", "XMLHttpRequest");
+            xhr.upload.onprogress = function (pe) {
+                console.log(pe);
+            };
+            xhr.send(form);
+            xhr.addEventListener('load', function (e) {
+                callback(JSON.parse(e.target.response));
+            });
+        }
+    }
+    function test(){
+        FormUpload(document.querySelector('form'), 'http://127.0.0.1:8000/upload');
+//        FormUpload(document.querySelector('form'), 'http://web.file.myqcloud.com/files/v1/10054791/localpublicimage/1/1/25.jpg');
+        console.log('submit');
+        return false;
+    }
+</script>
+</html>
