@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    var dtd = $.Deferred();
+
+//    //demo 1
+//    var wait = function(dtd){
+//        setTimeout(function(){
+//            dtd.reject();
+//        }, 3000);
+//        return dtd;
+//    };
+//    $.when(wait(dtd))
+//            .done(function(){console.log('done');})
+//            .fail(function(){console.log('fail');});
+
+//    //demo 2
+//    var wait = function(dtd){return dtd.promise(); };
+//
+//    $.when(wait(dtd))
+//            .done(function(){console.log('done1');})
+//            .fail(function(){console.log('fail1');})
+//            .done(function(){console.log('done2');})
+//            .fail(function(){console.log('fail2');})
+//            .always(function(){console.log('always');})
+//            .then(function(){console.log('then a')}, function(){console.log('then b')});
+//
+//    setTimeout(function(){
+//        dtd.resolve();
+//        dtd.reject();
+//    }, 3000);
+
+
+    // demo 3
+    dtd.promise()
+            .done(function(){console.log('done1'); return false;})
+            .done(function(){console.log('done2');});
+    setTimeout(function() {
+        dtd.resolve();
+    }, 3000);
+</script>
+</html>

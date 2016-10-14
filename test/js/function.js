@@ -1,3 +1,4 @@
+/*
 var Func = function(){};
 var obj = new Func();
 
@@ -8,3 +9,13 @@ console.log(typeof obj, obj.toString === Object.prototype.toString, Object.proto
 console.log(typeof Object, Object.toString === Function.prototype.toString, Function.prototype.toString.call(Func));
 
 console.log(Object instanceof Function);
+*/
+
+var a = {name: 'mr a'}, b = {name: 'mr b'};
+
+function check(){
+    console.log(this.name);
+}
+check();
+check.bind(a)();
+check.bind(b)();

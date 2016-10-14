@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>-->
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+    <!--<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>-->
+    <style>
+        .test, li{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <span class="test">test 1</span>
+</body>
+<script>
+    $(function(){
+        $('.test').show();
+
+        var $elem = $('<span class="test">test 2</span>');
+        $elem.show();
+        $('body').append($elem);
+    });
+</script>
+</html>

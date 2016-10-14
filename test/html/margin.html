@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>overflow避免元素被margin顶穿</title>
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+        }
+        .container{
+            background-color: #00f;
+        }
+        /*overflow 生成 layout 包含 margin*/
+        .a{
+            background-color: #f00;
+            overflow-y: auto;
+        }
+        .b{
+            height: 200px;
+            margin-bottom: 50px;
+            background-color: #0f0;
+        }
+
+        /*float 反方向 margin 无效*/
+        .c{
+            padding: 100px;
+            overflow: auto;
+        }
+        .c img{
+            float: left;
+            max-width: 100%;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="a">
+        <div class="b"></div>
+    </div>
+    <div class="c">
+        <img src="res/border.png" alt="">
+    </div>
+</div>
+</body>
+</html>

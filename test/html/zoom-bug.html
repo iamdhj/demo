@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <style>
+        .icon_bottom_menu{display: inline-block; background-image: url(http://static.leiphone.com/uploads/new/homepagerecommend/pic/201609/57d6161ac4050.png?imageMogr2/thumbnail/!504x272r/gravity/Center/crop/504x272/quality/90);}
+        .menu_role{zoom: .7; width: 504px; height: 272px; }
+        .on.menu_role{zoom: .7;}
+        div{width: 504px; height: 272px; background-color: #ccc;}
+    </style>
+</head>
+<body>
+<input type="checkbox">
+<div>
+    <span class="icon_bottom_menu menu_role on"></span>
+</div>
+</body>
+<script>
+    document.querySelector('input').addEventListener('change', function(){
+        var span = document.querySelector('span');
+        if(span.className == 'icon_bottom_menu menu_role'){
+            span.className = 'icon_bottom_menu menu_role on';
+        }else{
+            span.className = 'icon_bottom_menu menu_role';
+        }
+    });
+</script>
+</html>

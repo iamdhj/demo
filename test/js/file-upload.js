@@ -7,7 +7,8 @@ http.createServer(function(req, res){
     if(req.method == 'OPTIONS'){
         res.writeHead(200, {
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Method": "POST"
+            "Access-Control-Allow-Method": "POST",
+            "Access-Control-Allow-Headers": "Authorization, timeout, x-requested-with"
         });
         res.end();
         return;
@@ -23,8 +24,9 @@ http.createServer(function(req, res){
                 "Access-Control-Allow-Method": "POST",
                 "Access-Control-Allow-Headers": "Authorization, timeout, x-requested-with"
             });
-            res.write('received upload:\n\n');
-            res.end(util.inspect({fields: fields, files: files}));
+            res.write('{}');
+            res.end();
+            // res.end(util.inspect({fields: fields, files: files}));
         });
         return
     }

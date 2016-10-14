@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+        form > div{
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form action="" class="">
+            <div class="form-group">
+                <label for="number">number 1~9:</label><span class="text-info"></span>
+                <input type="number" class="form-control" id="number" placeholder="请输入数字" min="1" max="9">
+            </div>
+            <div class="form-group">
+                <label for="name">pattern "张三":</label><span></span>
+                <input type="text" class="form-control" id="name" placeholder="请输入名字" pattern="张三" title="不是张三" required>
+            </div>
+            <div class="form-group">
+                <label><input type="radio" name="gender" value="1" title="" required>男</label>
+                <label><input type="radio" name="gender" value="2" title="" required>女</label>
+            </div>
+            <div>
+                <input type="number" title="范围"><span></span>
+            </div>
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+            <div>
+                <input type="hidden" id="hidden">
+            </div>
+
+
+            <input type="submit" class="btn btn-default" value="submit">
+        </form>
+    </div>
+</div>
+
+</body>
+<script>
+    $(function(){
+        //number
+        $('#number').on('input', function(){
+           $(this).prev('span').text('rangeUnderflow' +  + this.validity.rangeOverflow + ' validity.rangeOverflow:' + this.validity.rangeOverflow);
+        });
+
+        $('#name').on('input', function(){
+            $(this).prev('span').text('validity.patternMismatch:' + this.validity.patternMismatch);
+        });
+//
+        $('#hidden')[0].setCustomValidity('隐藏错误');
+//        $form.attr('novalidate', 'novalidate').on('click','input[type="submit"]', function(){
+//            var message;
+//            $(this).parents('form').find('input').each(function(){
+//                if(!this.validity.valid){
+//                    if(!this.value){    //没有值提示placholder
+//                        message = this.placeholder;
+//                    }else if(this.validity.patternMismatch){    //正则不匹配，提示title
+//                        message = this.title;
+//                    }else if(this.validity.customError){    //自定义错误提示提示错误信息
+//                        message = this.validationMessage;
+//                    }else{  //其它情况提示title 或者 错误信息
+//                        message = this.title || this.validationMessage;
+//                    }
+//                    return false;
+//                }
+//            });
+//            if(message){
+//                alert(message);
+//                return false;
+//            }
+//        });
+    });
+</script>
+</html>
