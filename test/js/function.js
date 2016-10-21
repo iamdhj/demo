@@ -11,11 +11,12 @@ console.log(typeof Object, Object.toString === Function.prototype.toString, Func
 console.log(Object instanceof Function);
 */
 
-var a = {name: 'mr a'}, b = {name: 'mr b'};
+var a = {name: 'mr_a'}, b = {name: 'mr_b'};
 
-function check(){
-    console.log(this.name);
+function check(args, args1){
+    console.log(this.name, args, args1);
 }
-check();
-check.bind(a)();
-check.bind(b)();
+check(1);
+check.bind(a)(1);
+check.bind(a, null)(1);
+check.bind(b, 2)(1);

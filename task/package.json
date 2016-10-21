@@ -9,6 +9,8 @@
   "author": "hong",
   "license": "ISC",
   "devDependencies": {
+    "glob": "^7.1.1",
+    "glob2base": "^0.0.12",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-uglify": "^1.0.1",
@@ -21,7 +23,9 @@
     "gulp-rev-all": "^0.9.7",
     "gulp-sourcemaps": "^2.1.1",
     "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.10",
-    "through2": "^2.0.1"
+    "through2": "^2.0.1",
+    "vinyl": "^2.0.0"
   }
 }

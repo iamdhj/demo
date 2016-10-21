@@ -8,6 +8,13 @@
             height: 100%;
             margin: 0;
         }
+        .block{
+            width: 400px;
+            height: 30px;
+            border-top: 30px solid #ff5921;
+            margin-top: -30px;
+            background-color: red;
+        }
         .container{
             background-color: #00f;
         }
@@ -35,6 +42,10 @@
     </style>
 </head>
 <body>
+<div>
+    <div>block元素——负margin不会遮挡文字</div>
+    <div class="block"></div>
+</div>
 <div class="container">
     <div class="a">
         <div class="b"></div>
