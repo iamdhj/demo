@@ -1,0 +1,1 @@
+git add -u      //automatically stage tracked files -- including deleting the previously tracked files

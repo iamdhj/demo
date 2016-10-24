@@ -1,0 +1,146 @@
+.class-name {
+  color: blue;
+  content: class-name;
+}
+.test .a {
+  color: red;
+}
+.test-class {
+  color: red;
+}
+a.active > .test-class,
+a:hover > .test-class {
+  color: green;
+}
+.body .main {
+  height: 20px;
+}
+@media screen and (min-width: 641px) {
+  .body .main {
+    height: 40px;
+  }
+}
+.body .main .name {
+  color: red;
+}
+@media screen and (min-width: 641px) {
+  .body .main .name {
+    color: black;
+  }
+}
+.body .sec {
+  height: 30px;
+}
+@media screen and (min-width: 641px) {
+  .body .sec {
+    height: 60px;
+  }
+}
+/*fun*/
+.border-func {
+  border: 20px solid #fff;
+}
+.main {
+  border: 20px solid #fff;
+  border: 1px solid #fff;
+  border: 10px solid #fff;
+}
+/*foreach*/
+.cl-alice {
+  background-color: black;
+}
+.cl-bob {
+  background-color: orange;
+}
+.loop-main {
+  width: 10px;
+  width: 20px;
+  width: 30px;
+  width: 40px;
+  width: 50px;
+}
+/*parent*/
+.parent .child .parent .child:hover {
+  color: red;
+}
+/*cross*/
+.name .name,
+.name .age,
+.name .gender,
+.age .name,
+.age .age,
+.age .gender,
+.gender .name,
+.gender .age,
+.gender .gender {
+  color: red;
+}
+/*variable*/
+body {
+  background-color: green;
+}
+/*interpolate*/
+.company-a::before {
+  content: "Apple";
+}
+.company-g::before {
+  content: "Google";
+}
+@media screen and (orientation: landscape) {
+  body {
+    width: 960px;
+  }
+}
+.item {
+  border-width: 10px;
+  border: solid red;
+}
+.message,
+.warning,
+.success {
+  padding: 10px;
+  border: 1px solid #eee;
+}
+.warning {
+  color: #aaaaaa;
+}
+.success {
+  color: #bbbbbb;
+}
+/*js key `code` */
+.result {
+  content: "HELLO!";
+}
+/*error*/
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.list {
+  *zoom: 1;
+}
+.list:before,
+.list:after {
+  display: table;
+  content: "";
+}
+.list:before,
+.list:after {
+  display: table;
+  content: "";
+}
+.alert {
+  border: 1px solid #300;
+  background-color: #ecc;
+  color: #c00;
+}
+.alert {
+  width: 1px;
+}
+.main:first-child {
+  width: 12px;
+}

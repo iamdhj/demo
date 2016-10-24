@@ -1,0 +1,48 @@
+.circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.border {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.item {
+  color: #f00;
+  border-width: 20px;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+.item2 {
+  color: #00f;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.message,
+.warning,
+.success {
+  padding: 10px;
+  color: #f00;
+  border-width: 20px;
+}
+.warning {
+  color: #aaa;
+}
+.success {
+  color: #bbb;
+}
+.alert,
+.notice {
+  color: #f00;
+  border-width: 20px;
+  background-color: #ecc;
+  color: #c00;
+}
+.alert {
+  width: 1px;
+}
+.notice {
+  width: 2px;
+}
