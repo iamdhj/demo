@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-width=1, initial-scale=1.0, user-scalable=no" name="viewport">
+    <title>flip countdown</title>
+    <style>
+        .ctn {
+            position: relative;
+            width: 250px;
+            height: 500px;
+            line-height: 500px;
+            font-size: 500px;
+            color: #fff;
+            background-color: #000;
+        }
+        .ctn > span{
+            position: absolute;
+        }
+        .ctn:before{
+            bottom: 50%;
+            height: 50%;
+            transition: height .2s ease-in;
+            z-index: 2;
+        }
+        .ctn:after{
+            top: 50%;
+            height: 0;
+            transition: height .2s ease-out .2s;
+        }
+        .ctn:before, .ctn:after{
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            background-color: rgba(20, 20, 20, .9);
+            opacity: 0;
+
+        }
+        .flip.ctn:before{
+            height: 0;
+            opacity: 1;
+        }
+        .flip.ctn:after{
+            height: 50%;
+            opacity: 1;
+        }
+        #t{
+            display: inline-block;
+            position: absolute;
+            height: 250px;
+            overflow: hidden;
+            background: black;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="ctn">
+    <span id="t" class="num">1</span>
+    <span id="b" class="num">1</span>
+</div>
+</body>
+<script>
+    var order = 0, ctn = document.querySelector('.ctn'),
+        t = document.querySelector('#t'),
+        b = document.querySelector('#b');
+
+    setInterval(function(){
+        order = 9 <= order ? 0: order + 1;
+
+        t.innerHTML = order;
+        ctn.className = 'ctn flip';
+        setTimeout(function(){
+            b.innerHTML = order;
+            ctn.className = 'ctn';
+        }, 400);
+    }, 1000);
+</script>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>canvas chart</title>
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<script>
+    var config = {
+        radius: 15,  //节点半径
+        gap: 8,  //边框距离
+        density: 20,    //边框密度
+        labels: ['EVENTS', '', 'PRESENCE', 'COOPERATION'],  //文字描述
+        points: [
+            {x:.1, y:.1},
+            {x:.4, y:.5},
+            {x:.2, y:.9},
+            {x:.8, y:.2}
+        ],
+        bgColor: '#000',
+        mainColor: 'rgba(0, 250, 4, 1)',
+        fadeColor: 'rgba(0, 250, 4, 0.5)',
+        lineColor: 'rgba(128, 128, 128, 1)'
+    };
+
+    var i, path, points = [], width, height, canvas, ctx;
+
+    //canvas size
+    canvas = document.createElement('canvas');
+    canvas.width = width = window.innerWidth;
+    canvas.height = height = window.innerHeight * 0.8;
+
+    //parse point
+    config.points.forEach(function(p){
+        points.push({x: width * p.x, y: height * p.y});
+    });
+
+    ctx = canvas.getContext('2d');
+    if(ctx && Path2D){
+        drawElastic(drawElastic);//animation
+    }
+
+    document.body.appendChild(canvas);
+
+    function drawBase(){
+        //bg
+        ctx.fillStyle = config.bgColor;
+        ctx.fillRect(0, 0, width, height);
+
+        //line
+        ctx.strokeStyle = config.lineColor;
+        path = new Path2D();
+        points.forEach(function(p, index){
+            if(index == 3){
+                path.moveTo(points[1].x, points[1].y);
+            }
+            if(index == 0){
+                path.moveTo(p.x, p.y)
+            }else{
+                path.lineTo(p.x, p.y);
+            }
+        });
+        ctx.stroke(path);
+
+        //circle
+        points.forEach(function(p){
+            drawCircle(p.x, p.y, config.radius, config.mainColor);
+        });
+
+        //font
+        var font = '"Helvetica", "Arial", sans-serif';
+        ctx.fillStyle = config.mainColor;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.font = '24px ' + font;
+        ctx.fillText(config.labels[0], points[0].x + config.radius + config.gap * 3, points[0].y);
+        ctx.font = '48px ' + font;
+        ctx.fillText(config.labels[2], points[2].x + config.radius + config.gap * 3, points[2].y);
+        ctx.textAlign = 'right';
+        ctx.font = '20px ' + font;
+        ctx.fillText(config.labels[3], Math.min(points[3].x + 120 ,width - 10), points[3].y + config.radius + config.gap * 4);
+    }
+    function drawCircle(x, y, radius, color, isSolid){
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.lineWidth  = 2;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        if(isSolid){
+            ctx.stroke();
+        }else{
+            ctx.fill();
+        }
+        ctx.closePath();
+    }
+    function drawDot(x, y, radius, color){
+        var i, posX, posY, point, total = config.density, interval = Math.PI * 2 / total;
+        ctx.fillStyle = color;
+        for(i=0; i<total; ++i){
+            point = new Path2D();
+            posX = x + radius * Math.sin(i * interval);
+            posY = y + radius * Math.cos(i * interval);
+            point.arc(posX, posY, 2, 0, 2 * Math.PI);
+            ctx.fill(point);
+        }
+    }
+    function drawElastic(){
+        var date = new Date(),
+                percent = (date.getSeconds() % 2 == 0 ? date.getMilliseconds() : 1000 - date.getMilliseconds()) / 1000,
+                radius = config.radius - config.gap / 3 * percent;
+        drawBase();
+        drawExtra(radius, percent);
+        if(requestAnimationFrame && typeof(requestAnimationFrame) == 'function'){
+            requestAnimationFrame(drawElastic);
+        }
+    }
+    function drawExtra(radius, percent){
+        var lineColor;
+        percent = percent < 0.5 ? 1 - percent : 0.5;
+        lineColor = config.lineColor.replace(/\d+\.?\d(?:\))$/, percent + ')');
+
+        drawDot(points[0].x, points[0].y, radius + config.gap * 1.5, lineColor);
+        drawCircle(points[2].x, points[2].y, radius + config.gap, lineColor, true);
+        drawDot(points[2].x, points[2].y, radius + config.gap * 2, lineColor);
+        drawDot(points[3].x, points[3].y, radius + config.gap, lineColor);
+        drawCircle(points[3].x, points[3].y, radius + config.gap * 2, lineColor, true);
+        drawCircle(points[1].x, points[1].y, config.radius * 2, config.fadeColor);
+    }
+</script>
+</html>

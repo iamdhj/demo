@@ -13,5 +13,6 @@
     "moment": "^2.15.1",
     "through2": "^2.0.1",
     "vinyl": "^2.0.0"
-  }
+  },
+  "devDependencies": {}
 }

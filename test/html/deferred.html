@@ -9,8 +9,7 @@
 
 </body>
 <script>
-    var dtd = $.Deferred();
-
+//    var dtd = $.Deferred();
 //    //demo 1
 //    var wait = function(dtd){
 //        setTimeout(function(){
@@ -39,12 +38,22 @@
 //    }, 3000);
 
 
-    // demo 3
-    dtd.promise()
-            .done(function(){console.log('done1'); return false;})
-            .done(function(){console.log('done2');});
-    setTimeout(function() {
-        dtd.resolve();
-    }, 3000);
+//    // demo 3
+//    dtd.promise()
+//            .done(function(){console.log('done1'); return false;})
+//            .done(function(){console.log('done2');});
+//    setTimeout(function() {
+//        console.log('time out!');
+//        dtd.resolve();
+//    }, 3000);
+
+    //demo4
+    var d = $.Deferred(function(dtd){
+        setTimeout(function(){
+            console.log('time out!');
+            dtd.resolve();
+        }, 3000);
+    }).done(function(){console.log('done');}).promise({extra: 'extra message'});
+    console.log(d);
 </script>
 </html>

@@ -97,9 +97,9 @@ gulp.task('revAll', function () {
 });
 
 gulp.task('test', function(){
-    gulp.src('src/less/res/*', {read: false})
-        .pipe(fileVer.revision())
-        .pipe(fileVer.write('src/less/main.less', 'src/less/'))
+    gulp.src('src/**/*.@(jpg|png)', {read: false})
+        .pipe(fileVer.record())
+        .pipe(fileVer.revision(['src/less/main.less', 'src/less/init.less']))
         .pipe(gulp.dest('dist/test'));
 });
 
