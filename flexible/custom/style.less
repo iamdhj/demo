@@ -1,0 +1,49 @@
+@px: 100vw / 320 / 2;
+
+body{
+  margin: 0;
+}
+
+header{
+  margin: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  > span{
+    display: inline-block;
+  }
+  .profile{
+    vertical-align: top;
+    margin-right: 16px;
+    img{
+      width: 55 * @px;
+    }
+  }
+  .info{
+    white-space: nowrap;
+    > span{
+      display: block;
+    }
+    .author{
+      padding-bottom: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+    .title{
+      font-size: 26px;
+      color: #333;
+    }
+  }
+}
+section{
+  margin: 0 20px;
+  font-size: 22px;
+  color: #666;
+  > .remark{
+    padding-bottom: 20px;
+    color: #333;
+  }
+  > .text{
+    line-height: 1.5;
+    text-indent: 2em;
+  }
+}

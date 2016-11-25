@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>canvas colorful circle</title>
+    <style>
+        canvas{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<canvas width="200" height="200" id="demo"></canvas>
+<canvas width="200" height="200" id="colorful"></canvas>
+<canvas width="200" height="200" id="circle"></canvas>
+</body>
+<script>
+    var ctx = document.querySelector('#demo').getContext('2d');
+    ctx.lineWidth = 20;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'orange';
+    ctx.arc(100, 100, 50, 0, Math.PI / 180 * 270);
+    ctx.stroke();
+</script>
+<script>
+    var ctx = document.querySelector('#colorful').getContext('2d');
+
+    var lingrad = ctx.createLinearGradient(40, 40, 160, 160);
+    lingrad.addColorStop(0, '#3e3');
+    lingrad.addColorStop(0.5, '#383');
+    lingrad.addColorStop(1, '#353');
+
+    ctx.lineWidth = 20;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = lingrad;
+    ctx.arc(100, 100, 50, 0, Math.PI / 180 * 270);
+    ctx.stroke();
+</script>
+<script>
+    var ctx = document.querySelector('#circle').getContext('2d');
+
+    var color, base, angle = Math.PI * 2 / 360, total = 270;
+    ctx.lineWidth = 20;
+    ctx.lineCap = 'round';
+
+    function draw(){
+        base = 270;     //new Date().getMilliseconds() / 1000 * 270 | 0;
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(40, 40, 160, 160);
+        for(var i=1; i<base; ++i){
+            color = 100 + parseInt(100 / total * i);
+            ctx.strokeStyle = 'rgb(25,' + color + ',' + color + ')';
+            ctx.beginPath();
+            ctx.arc(100, 100, 50, angle * (i - 1), angle * i);
+            ctx.stroke();
+        }
+
+//        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
+</html>

@@ -10,6 +10,11 @@ var util = require('util');
 
 // console.log(util.isArray([]), Array.isArray([]));
 
-var x = [1,2,3], y = Object.create(x), z = Object.getPrototypeOf(y);
-console.log(Array.isArray(y), Array.isArray(z), util.isArray(y), util.isArray(z));
-x.forEach((a,b,c) =>{ console.log(a,b,c); });
+// var x = [1,2,3], y = Object.create(x), z = Object.getPrototypeOf(y);
+// console.log(Array.isArray(y), Array.isArray(z), util.isArray(y), util.isArray(z));
+// x.forEach((a,b,c) =>{ console.log(a,b,c); });
+
+var n, i=0, a = [7, 8, 9];
+while(n=a[i++]){
+    console.log(n);
+}

@@ -5,76 +5,125 @@
     <meta content="width=device-width, initial-width=1, initial-scale=1.0, user-scalable=no" name="viewport">
     <title>flip countdown</title>
     <style>
-        .ctn {
+        .ctn, .ctn2{
+            display: inline-block;
             position: relative;
-            width: 250px;
-            height: 500px;
-            line-height: 500px;
-            font-size: 500px;
+            text-align: center;
+            width: 53px;
+            height: 54px;
+            line-height: 50px;
+            font-size: 28px;
             color: #fff;
-            background-color: #000;
-        }
-        .ctn > span{
-            position: absolute;
-        }
-        .ctn:before{
-            bottom: 50%;
-            height: 50%;
-            transition: height .2s ease-in;
-            z-index: 2;
-        }
-        .ctn:after{
-            top: 50%;
-            height: 0;
-            transition: height .2s ease-out .2s;
+            text-shadow: 0 0 1px #888;
+            text-indent: -2px;
+            -webkit-text-stroke: 1px #ccc;
+            background-image: url(res/promotion_bg.png);
+            font-family: "Microsoft YaHei";
+            background-size: 100% 100%;
+            overflow: hidden;
         }
         .ctn:before, .ctn:after{
             content: "";
             display: block;
             position: absolute;
-            width: 100%;
-            background-color: rgba(20, 20, 20, .9);
+            width: 90%;
+            border: solid rgba(127, 40, 127, 0.9);
+            margin-left: 3%;
+            background-color: rgba(185, 55, 185, .9);
             opacity: 0;
-
+        }
+        .ctn:before{
+            bottom: 29px;
+            height: 25px;
+            border-width: 1px 1px 0;
+            transition: height .15s ease-in;
+            z-index: 2;
+        }
+        .ctn:after{
+            top: 25px;
+            height: 0;
+            border-width: 0 1px 1px;
+            transition: height .15s ease-out .15s;
         }
         .flip.ctn:before{
             height: 0;
             opacity: 1;
         }
         .flip.ctn:after{
-            height: 50%;
+            height: 25px;
             opacity: 1;
         }
-        #t{
+        .t{
             display: inline-block;
             position: absolute;
-            height: 250px;
+            left: 0;
+            width: 100%;
+            height: 25px;
             overflow: hidden;
-            background: black;
-            z-index: 1;
+        }
+        .b{
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            width: 100%;
+            height: 27px;
+            line-height: 0;
+            overflow: hidden;
+        }
+        img{
+            position: absolute;
+            top: 22px;
+            left: 3px;
+        }
+        .t2, .b2{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .t2{
+            margin-top: -100%;
+        }
+        .rotate .t2{
+            margin-top: 0;
+            transition: margin-top .15s ease-in;
         }
     </style>
 </head>
 <body>
 <div class="ctn">
-    <span id="t" class="num">1</span>
-    <span id="b" class="num">1</span>
+    <span class="t num">1</span>
+    <span class="b num">1</span>
+    <img src="res/promotion_line.png" alt="">
+</div>
+
+<div class="ctn2">
+    <span class="t2 num">1</span>
+    <span class="b2 num">1</span>
 </div>
 </body>
 <script>
-    var order = 0, ctn = document.querySelector('.ctn'),
-        t = document.querySelector('#t'),
-        b = document.querySelector('#b');
+    var order = 0,
+        ctn = document.querySelector('.ctn'),
+        ctn2 = document.querySelector('.ctn2'),
+        t = document.querySelector('.t'),
+        t2 = document.querySelector('.t2'),
+        b = document.querySelector('.b'),
+        b2 = document.querySelector('.b2');
 
     setInterval(function(){
         order = 9 <= order ? 0: order + 1;
 
         t.innerHTML = order;
+        t2.innerHTML = order;
         ctn.className = 'ctn flip';
+        ctn2.className = 'ctn2 rotate';
         setTimeout(function(){
             b.innerHTML = order;
+            b2.innerHTML = order;
             ctn.className = 'ctn';
-        }, 400);
+            ctn2.className = 'ctn2';
+        }, 300);
     }, 1000);
 </script>
 </html>

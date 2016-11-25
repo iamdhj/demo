@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.2/??flexible_css.js,flexible.js"></script>
+    <style>
+        body{
+            margin: 0;
+        }
+        #main{
+            display: inline-block;
+            width: 10rem;
+            font-size: 1rem;
+            background-color: orange;
+        }
+        .child{
+            width: 100vw;
+            font-size: 10vw;
+            background-color: cyan;
+        }
+    </style>
+</head>
+<body>
+<div id="main">春有百花秋有月,夏有凉风冬有雪</div>
+<div class="child">若无闲事挂心头,便是人间好时节</div>
+<script>
+    window.addEventListener('load', function(){
+        document.body.style.fontSize = 14 * lib.flexible.dpr + 'px';
+    });
+</script>
+</body>
+</html>

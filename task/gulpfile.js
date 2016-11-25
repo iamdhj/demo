@@ -14,16 +14,32 @@ var gulp = require('gulp'),
     File = require('vinyl'),
     glob = require('glob'),
     glob2base = require('glob2base'),
-    fileVer = require('./gulp-file-ver');
+    fileVer = require('./gulp-file-ver'),
+    inOne = require('./gulp-in-one');
 
 function handle(){
     return through2.obj(function(file, enc, cb){
-        var stream = this;
+        var self = this;
 
-        stream.push(file);
+        self.push(file);
         cb();
+        var stream = new Readable({objectMode: true });
+        stream._read = function(){
+            stream.push(file);
+            stream.push(null);
+        };
+        stream.pipe(less()).pipe(handle2(self, cb));
 
         console.log('handle', file.path, file.relative);
+    }, function(){
+        console.log('finish');
+    });
+}
+function handle2(target, callback) {
+    return through2.obj(function (file, enc, cb) {
+        // console.log(file.contents.toString());
+        target.push(file);
+        callback()
     });
 }
 
@@ -96,7 +112,7 @@ gulp.task('revAll', function () {
         .pipe(gulp.dest('dist/revAll'));
 });
 
-gulp.task('test', function(){
+gulp.task('fileVer', function(){
     gulp.src('src/**/*.@(jpg|png)', {read: false})
         .pipe(fileVer.record())
         .pipe(fileVer.revision(['src/less/main.less', 'src/less/init.less']))
@@ -105,9 +121,16 @@ gulp.task('test', function(){
 
 gulp.task('watch', function() {
    gulp.watch('src/less/**', function(file){
-       console.log(file.type, file.path, file.path.replace());
+       console.log(file.type, file.path, file.path.relative);
 
-       gulp.src(file.path).pipe(handle());
+       gulp.src(file.path).pipe(less());
    });
 });
 
+gulp.task('reverse', function(){
+   gulp.src('src/less/init.less').pipe(handle()).pipe(gulp.dest('test'));
+});
+
+gulp.task('inOne', function(){
+    gulp.src('src/pack/*pack*').pipe(inOne()).pipe(gulp.dest('dist/pack'));
+});

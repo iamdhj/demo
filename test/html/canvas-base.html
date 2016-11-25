@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Document</title>
+    <style>
+        canvas{
+            margin: 50px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<canvas width="200" height="200" id="restore"></canvas>
+<canvas width="200" height="200" id="gradation"></canvas>
+<canvas width="200" height="200" id="line"></canvas>
+</body>
+<script>
+    var ctx = document.getElementById('restore').getContext('2d');
+
+    ctx.fillRect(0,0,150,150);   // Draw a rectangle with default settings
+    ctx.save();                  // Save the default state
+
+    ctx.fillStyle = '#09F';      // Make changes to the settings
+    ctx.fillRect(15,15,120,120); // Draw a rectangle with new settings
+
+    ctx.save();                  // Save the current state
+    ctx.fillStyle = '#FFF';      // Make changes to the settings
+    ctx.globalAlpha = 0.5;
+    ctx.fillRect(30,30,90,90);   // Draw a rectangle with new settings
+
+    ctx.restore();               // Restore previous state
+    ctx.fillRect(45,45,60,60);   // Draw a rectangle with restored settings
+
+    ctx.restore();               // Restore original state
+    ctx.fillRect(60,60,30,30);   // Draw a rectangle with restored settings
+</script>
+
+<script>
+    var ctx = document.getElementById('gradation').getContext('2d');
+    var lingrad = ctx.createLinearGradient(0, 0, 100, 100);
+    lingrad.addColorStop(0, '#00ff00');
+    lingrad.addColorStop(0.5, '#0000ff');
+
+    var radgrad = ctx.createRadialGradient(150, 150, 0, 150, 150, 50);
+    radgrad.addColorStop(0, '#f00');
+    radgrad.addColorStop(0.5, '#0f0');
+    radgrad.addColorStop(1, '#00f');
+
+
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = lingrad;
+    ctx.strokeRect(5, 5, 100, 100);
+    ctx.fillStyle  = radgrad;
+    ctx.fillRect(100, 100, 200, 200);
+</script>
+
+<script>
+    var ctx = document.getElementById('line').getContext('2d');
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = 'red';
+    ctx.moveTo(10, 10);
+    ctx.lineTo(100, 10);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'green';
+    ctx.moveTo(10, 50);
+    ctx.lineTo(100, 50);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = 'blue';
+    ctx.moveTo(10, 90);
+    ctx.lineTo(100, 90);
+    ctx.lineTo(10, 130);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.fillStyle = 'purple';
+    ctx.moveTo(10, 140);
+    ctx.lineTo(100, 140);
+    ctx.lineTo(10, 180);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'orange';
+    ctx.moveTo(190, 10);
+    ctx.lineTo(110, 10);
+//    ctx.closePath();
+    ctx.lineTo(110, 100);
+    ctx.lineTo(190, 100);
+    ctx.stroke();
+</script>
+</html>

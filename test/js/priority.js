@@ -4,4 +4,6 @@ var a = ()=>{console.log('a'); return false},
 
 console.log(a() || b() && c());
 
+console.log( true || false && false, (true || false) && false );
+
 console.log( 0 && 2 ? 3 : 4 );
